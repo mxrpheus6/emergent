@@ -1,4 +1,4 @@
-package com.mxrph.emergent;
+package com.mxrph;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;

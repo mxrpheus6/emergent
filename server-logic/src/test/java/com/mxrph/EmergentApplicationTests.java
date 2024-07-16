@@ -1,4 +1,4 @@
-package com.mxrph.emergent;
+package com.mxrph;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;

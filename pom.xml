@@ -23,6 +23,7 @@
 	</developers>
     <modules>
         <module>server-logic</module>
+        <module>common-jpa</module>
     </modules>
     <scm>
 		<connection/>
@@ -33,6 +34,23 @@
 	<properties>
 		<java.version>21</java.version>
 	</properties>
+
+	<dependencies>
+		<dependency>
+			<groupId>org.projectlombok</groupId>
+			<artifactId>lombok</artifactId>
+			<version>1.18.34</version>
+			<scope>provided</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-data-jpa</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.postgresql</groupId>
+			<artifactId>postgresql</artifactId>
+		</dependency>
+	</dependencies>
 
 	<build>
 		<plugins>
