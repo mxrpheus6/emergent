@@ -3,7 +3,7 @@ package com.mxrph.api.controller;
 import com.mxrph.api.model.LoginBody;
 import com.mxrph.api.model.LoginResponse;
 import com.mxrph.api.model.RegistrationBody;
-import com.mxrph.entity.AppUser;
+import com.mxrph.entity.User;
 import com.mxrph.service.AuthService;
 import com.mxrph.service.JwtService;
 import org.springframework.http.ResponseEntity;
@@ -24,15 +24,15 @@ public class AuthController {
     }
 
     @PostMapping("/register")
-    public ResponseEntity<AppUser> signUp(@RequestBody RegistrationBody body) {
-        AppUser user = authService.signUp(body);
+    public ResponseEntity<User> signUp(@RequestBody RegistrationBody body) {
+        User user = authService.signUp(body);
 
         return ResponseEntity.ok(user);
     }
 
     @PostMapping("/login")
     public ResponseEntity<LoginResponse> signIn(@RequestBody LoginBody body) {
-        AppUser user = authService.signIn(body);
+        User user = authService.signIn(body);
 
         String jwtToken = jwtService.generateToken(user);
 

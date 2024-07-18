@@ -2,8 +2,8 @@ package com.mxrph.service;
 
 import com.mxrph.api.model.LoginBody;
 import com.mxrph.api.model.RegistrationBody;
-import com.mxrph.dao.AppUserDAO;
-import com.mxrph.entity.AppUser;
+import com.mxrph.dao.UserDAO;
+import com.mxrph.entity.User;
 import com.mxrph.entity.enums.UserState;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -12,21 +12,21 @@ import org.springframework.stereotype.Service;
 
 @Service
 public class AuthService {
-    private final AppUserDAO appUserDAO;
+    private final UserDAO userDAO;
     private final PasswordEncoder passwordEncoder;
     private final AuthenticationManager authenticationManager;
 
-    public AuthService(AppUserDAO appUserDAO,
+    public AuthService(UserDAO userDAO,
                        PasswordEncoder passwordEncoder,
                        AuthenticationManager authenticationManager
     ) {
-        this.appUserDAO = appUserDAO;
+        this.userDAO = userDAO;
         this.passwordEncoder = passwordEncoder;
         this.authenticationManager = authenticationManager;
     }
 
-    public AppUser signUp(RegistrationBody body) {
-        AppUser user = AppUser.builder()
+    public User signUp(RegistrationBody body) {
+        User user = User.builder()
                 .username(body.getUsername())
                 .email(body.getEmail())
                 .password(passwordEncoder.encode(body.getPassword()))
@@ -34,10 +34,10 @@ public class AuthService {
                 .userState(UserState.BASIC_STATE)
                 .build();
 
-        return appUserDAO.save(user);
+        return userDAO.save(user);
     }
 
-    public AppUser signIn(LoginBody body) {
+    public User signIn(LoginBody body) {
         authenticationManager.authenticate(
                 new UsernamePasswordAuthenticationToken(
                         body.getUsername(),
@@ -45,6 +45,6 @@ public class AuthService {
                 )
         );
 
-        return appUserDAO.findByUsername(body.getUsername()).orElseThrow();
+        return userDAO.findByUsername(body.getUsername()).orElseThrow();
     }
 }

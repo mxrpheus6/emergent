@@ -1,6 +1,6 @@
 package com.mxrph.config;
 
-import com.mxrph.dao.AppUserDAO;
+import com.mxrph.dao.UserDAO;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -13,15 +13,15 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
 @Configuration
 public class ApplicationConfiguration {
-    private final AppUserDAO appUserDAO;
+    private final UserDAO userDAO;
 
-    public ApplicationConfiguration(AppUserDAO appUserDAO) {
-        this.appUserDAO = appUserDAO;
+    public ApplicationConfiguration(UserDAO userDAO) {
+        this.userDAO = userDAO;
     }
 
     @Bean
     UserDetailsService userDetailsService() {
-        return username -> appUserDAO.findByUsername(username)
+        return username -> userDAO.findByUsername(username)
                 .orElseThrow(() -> new UsernameNotFoundException("User not found"));
     }
 
