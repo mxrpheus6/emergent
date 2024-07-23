@@ -1,6 +1,8 @@
-package com.mxrph.entity;
+package com.mxrph.model.entity;
 
-import com.mxrph.entity.enums.UserState;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.mxrph.model.dto.UserDTO;
+import com.mxrph.model.entity.enums.UserState;
 import jakarta.persistence.*;
 import lombok.*;
 import org.hibernate.annotations.CreationTimestamp;
@@ -49,6 +51,20 @@ public class User implements UserDetails {
     @Enumerated(EnumType.STRING)
     @Column(nullable = false)
     private UserState userState;
+
+    @OneToMany(mappedBy = "user")
+    private List<Contact> contacts;
+
+    public UserDTO toDTO() {
+        return UserDTO.builder()
+                .username(username)
+                .email(email)
+                .phoneNumber(phoneNumber)
+                .firstName(firstName)
+                .lastName(lastName)
+                .dateOfBirth(dateOfBirth)
+                .build();
+    }
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {

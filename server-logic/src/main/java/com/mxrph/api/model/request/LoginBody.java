@@ -1,4 +1,4 @@
-package com.mxrph.api.model;
+package com.mxrph.api.model.request;
 
 import jakarta.validation.constraints.NotNull;
 import lombok.Getter;

@@ -1,4 +1,4 @@
-package com.mxrph.entity.enums;
+package com.mxrph.model.entity.enums;
 
 public enum UserState {
     BASIC_STATE,

@@ -1,4 +1,4 @@
-package com.mxrph.api.model;
+package com.mxrph.api.model.response;
 
 import lombok.Builder;
 import lombok.Getter;

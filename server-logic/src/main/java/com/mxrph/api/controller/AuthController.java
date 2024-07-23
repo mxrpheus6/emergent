@@ -1,9 +1,9 @@
 package com.mxrph.api.controller;
 
-import com.mxrph.api.model.LoginBody;
-import com.mxrph.api.model.LoginResponse;
-import com.mxrph.api.model.RegistrationBody;
-import com.mxrph.entity.User;
+import com.mxrph.api.model.request.LoginBody;
+import com.mxrph.api.model.response.LoginResponse;
+import com.mxrph.api.model.request.RegistrationBody;
+import com.mxrph.model.entity.User;
 import com.mxrph.service.AuthService;
 import com.mxrph.service.JwtService;
 import org.springframework.http.ResponseEntity;

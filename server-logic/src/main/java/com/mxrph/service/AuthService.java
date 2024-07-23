@@ -1,10 +1,10 @@
 package com.mxrph.service;
 
-import com.mxrph.api.model.LoginBody;
-import com.mxrph.api.model.RegistrationBody;
-import com.mxrph.dao.UserDAO;
-import com.mxrph.entity.User;
-import com.mxrph.entity.enums.UserState;
+import com.mxrph.api.model.request.LoginBody;
+import com.mxrph.api.model.request.RegistrationBody;
+import com.mxrph.repository.UserRepository;
+import com.mxrph.model.entity.User;
+import com.mxrph.model.entity.enums.UserState;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -12,15 +12,15 @@ import org.springframework.stereotype.Service;
 
 @Service
 public class AuthService {
-    private final UserDAO userDAO;
+    private final UserRepository userRepository;
     private final PasswordEncoder passwordEncoder;
     private final AuthenticationManager authenticationManager;
 
-    public AuthService(UserDAO userDAO,
+    public AuthService(UserRepository userRepository,
                        PasswordEncoder passwordEncoder,
                        AuthenticationManager authenticationManager
     ) {
-        this.userDAO = userDAO;
+        this.userRepository = userRepository;
         this.passwordEncoder = passwordEncoder;
         this.authenticationManager = authenticationManager;
     }
@@ -34,7 +34,7 @@ public class AuthService {
                 .userState(UserState.BASIC_STATE)
                 .build();
 
-        return userDAO.save(user);
+        return userRepository.save(user);
     }
 
     public User signIn(LoginBody body) {
@@ -45,6 +45,6 @@ public class AuthService {
                 )
         );
 
-        return userDAO.findByUsername(body.getUsername()).orElseThrow();
+        return userRepository.findByUsername(body.getUsername()).orElseThrow();
     }
 }
